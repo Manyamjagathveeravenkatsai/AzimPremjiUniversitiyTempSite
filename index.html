@@ -4203,7 +4203,38 @@ src="https://px.ads.linkedin.com/collect?pid=6420436&amp;fmt=gif" width="1" heig
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
 		}
-	};
+	}
+	window.addEventListener("onEmbeddedMessagingReady", () => {
+    console.log("✅ Embedded Messaging Ready");
+
+    // 🔥 Change this for testing
+    const isLoggedIn = false;
+
+    let hiddenFields;
+
+    if (isLoggedIn) {
+        // 🔐 Logged-in user
+        hiddenFields = {
+            "IsAuthorized": "true",
+            "ContactId": "003Hs00005nGfXaIAK"
+        };
+    } else {
+        // 👤 Guest user
+        hiddenFields = {
+            "IsAuthorized": "false"
+        };
+    }
+
+    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(hiddenFields);
+
+    console.log("✅ Hidden Prechat Sent:", hiddenFields);
+});
+
+/* LOGIN REDIRECT */
+function goToLogin() {
+    const experienceURL = "https://cl1733737391994.my.site.com/APF/s/login";
+    window.location.href = experienceURL;
+}
 </script>
 <script type='text/javascript' src='https://cl1733737391994.my.site.com/ESWAjimpremjisupportpr1774021178922/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body></html>
